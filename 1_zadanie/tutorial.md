@@ -12,7 +12,7 @@
   - `$ip a`
   - `$ip link show`
   - `$ifconfig`, `$apt-get install net-tools`
-  - `$ip addr del XXX.XXX.XXX.XXX/XX dev enp0s3` *// vymazanie IP adresy, ak je náhodou nastavená sekundárna IP adresa pri klientovi**
+  - `$ip addr del XXX.XXX.XXX.XXX/XX dev enp0s3` *// vymazanie IP adresy, ak je náhodou nastavená sekundárna IP adresa pri klientovi*
   
 ## 1. Smerovanie
 
