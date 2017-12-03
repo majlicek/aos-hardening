@@ -100,9 +100,11 @@ Preklad doménového mena na IP adresu pomocou DNS servera nastavíme cez DHCP s
 `$nano /etc/default/isc-dhcp-server`
 > INTERFACES=”enp0s8“
 
-`$$cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd_backup.conf`
-`$echo “” > /etc/dhcp/dhcpd.conf`
-`$nano /etc/dhcp/dhcpd.conf`
+```bash
+$cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd_backup.conf
+$echo “” > /etc/dhcp/dhcpd.conf
+$nano /etc/dhcp/dhcpd.conf
+```
 
 ```bash
 subnet 10.0.0.0 netmask 255.255.255.0 {
@@ -154,6 +156,36 @@ $less /var/log/syslog
 ```
 
 ## 3. SSH
+
+### A) SSH Server
+
+*Inštalácia*
+
+`$apt-get install openssh-server`
+
+*Spustenie/Stop/Reštart*
+
+`$service ssh start/stop/restart/status`
+
+*Konfigurácia*
+
+`$nano /etc/ssh/sshd_config`
+
+### B) SSH Klient
+
+*Inštalácia*
+
+`$apt-get install openssh-client`
+
+*Konfigurácia*
+
+`$nano /etc/ssh/ssh_config`
+
+`$systemctl restart sshd`
+
+*Prihlásenie*
+
+`$ssh meno_pouzivatela@ip_adresa`
 
 ## 4. Konfiguračné súbory + hardening
   
