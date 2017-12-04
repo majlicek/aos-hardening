@@ -120,6 +120,49 @@ $php -v
 
 ```
 
+`/etc/apache2/sites-available/prvyweb-domena.sk.conf`
+
+```text
+<IfModule mod_ssl.c>
+ <VirtualHost *:1000>
+	ServerAdmin janko.hrasko@gmail.com
+	ServerName prvyweb.domena.sk
+	ServerAlias www.prvyweb.domena.sk
+	DocumentRoot /var/www/domenask/prvyweb
+
+	SSLEngine on
+	SSLCertificateFile	/etc/ssl/certs/ssl-cert-snakeoil.pem
+	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+	<FilesMatch "\.(cgi|shtml|phtml|php)$">
+		SSLOptions +StdEnvVars
+	</FilesMatch>
+	<Directory /usr/lib/cgi-bin>
+		SSLOptions +StdEnvVars
+	</Directory>
+
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>	
+	<Directory /var/www/domenask/prvyweb/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+	<Directory />
+		Options None
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	LogLevel warn
+	ErrorLog /var/log/apache2/error.log
+	CustomLog /var/log/apache2/prvyweb.domena.sk.access.log combined
+ </VirtualHost>
+</IfModule>
+```
+
 ### PHP 
 
 `/etc/php/7.0/apache2/php.ini` - neobsahuje celý súbor, iba dôležité prvky
@@ -199,10 +242,6 @@ html_errors = Off
 sql.safe_mode = On
 
 [Session]
-; Handler used to store/retrieve data.
-; http://php.net/session.save-handler
-session.save_handler = files
-
 ; Ochrana sessions.
 session.save_path = "/var/lib/php/sessions"
 session.use_strict_mode = 0
