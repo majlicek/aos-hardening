@@ -29,7 +29,7 @@
 > ak chceme, aby server počúval na zvolenej IP adrese, potom `Listen <IP>:80` 
 
 
-*Defaultne umiestnenioe webových sídel*
+*Defaultne umiestnenie webových sídel*
 
 `/var/www`
 
@@ -64,7 +64,47 @@ $nano /etc/apache2/sites-available/prvyweb-domena.sk.conf
   LogLevel warn
   CustomLog /var/log/apache2/prvyweb.domena.sk.access.log combined
 </VirtualHost>
-
 ```
 
+*Aktivovanie nového virtuálneho hostu*
 
+```bash
+$a2ensite prvyweb-domena.sk.conf
+$systemctl reload apache2.service // ak nejaká chyba, tak $journalctl | tail
+```
+
+## 3. Konfigurácia Apache2 - SSL/HTTPS
+
+*Modul mod_ssl*
+
+```bash
+$a2enmod ssl
+$service apache2 restart
+```
+
+*Šablóna pre virtuálny web cez SSL*
+
+`/etc/apache2/sites-available/default-ssl` – skopírovať nastavenia SSL do nášho konfiguráku nového virtuálneho webového sídla
+
+```bash
+$a2ensite prvyweb-domena.sk.conf
+$service apache2 restart
+```
+
+**Potom pristupujeme k webu https://IP_ADRESA:80/**
+
+*Certifikát (Self-signed certifikát)*
+
+```bash
+apt-get install ssl-cert
+make-ssl-cert
+```
+
+## 4. Inštalácia PHP
+
+```bash
+$apt-get install php 
+$php -v
+```
+
+`$nano /etc/php/../apache2/php.ini` // konfiguracia php
