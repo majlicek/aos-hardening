@@ -147,12 +147,12 @@ $php -v
 	<Directory /var/www/domenask/prvyweb/>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride None
-		Order allow,deny
+		Order Allow,Deny
 		allow from all
 	</Directory>
 	<Directory />
 		Options None
-		Order allow,deny
+		Order Allow,Deny
 		Allow from all
 	</Directory>
 
@@ -161,6 +161,36 @@ $php -v
 	CustomLog /var/log/apache2/prvyweb.domena.sk.access.log combined
  </VirtualHost>
 </IfModule>
+```
+
+Limit HTTP požiadaviek pre `/var/www/[klienti]`
+
+```text
+<Directory /var/www/[klienti]/>
+ Options +FollowSymlinks
+ AllowOverride All
+ LimitRequestBody 102400
+</Directory>
+```
+
+Obmedzenie prehľadávania konkrétnych adresárov 
+
+`/etc/apache2/apache2.conf`
+
+```text
+<Directory />
+  Order Deny,Allow
+  Deny from all
+  Options None
+  AllowOverride None
+</Directory>
+```
+
+`/etc/apache2/sites-enabled/prvyweb-domena.sk.conf`
+
+```text
+Order Allow,Deny
+Allow from all
 ```
 
 ### PHP 
@@ -256,3 +286,6 @@ session.name = SESSION
 
 session.cookie_httponly = 1
 ```
+
+Zdroje: 
+(1) https://www.techrepublic.com/article/how-to-secure-your-apache-2-server-in-four-steps/
