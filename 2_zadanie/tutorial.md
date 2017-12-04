@@ -108,3 +108,112 @@ $php -v
 ```
 
 `$nano /etc/php/../apache2/php.ini` // konfiguracia php
+
+## 5. Konfiguračné súbory + hardening
+
+### Apache2
+
+`/etc/apache2/apache2.conf`
+
+
+```bash
+
+```
+
+### PHP 
+
+`/etc/php/7.0/apache2/php.ini` - neobsahuje celý súbor, iba dôležité prvky
+
+
+```text
+[PHP]
+; Inspiration sources:
+;   (1) madirish.net/199
+;   (2) cyberciti.biz/tips/php-security-best-practices-tutorial.html
+;   (3) owasp.org/index.php/PHP_Configuration_Cheat_Sheet
+
+; Enable the PHP scripting language engine under Apache.
+engine = On
+
+; Obmedzenie PHP pristupovat k file systemu.
+open_basedir = /secure/place
+
+; Zakazanie nebezpecnych PHP funkcii.
+disable_functions = pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source,mail,imap_mail,eval,phpinfo,posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid,posix_getppid,posix_getpwnam,posix_getpwuid,posix_getrlimit,posix_getsid,posix_getuid,posix_initgroups,posix_isatty,posix_kill,posix_mkfifo,posix_mknod,posix_setegid,posix_setuid,posix_setgid,posix_setgid,posix_setsid,posix_setuid,posix_strerror,posix_ttyname,posix_uname,posix_access,posix_ctermid
+
+; Logovanie vsetkych PHP chyb.
+display_errors = Off
+log_errors = On
+error_log = /var/log/apache2/php_scripts_error.log
+
+; Enable cgi.force_redirect.
+cgi.force_redirect = 1
+
+; Upload suborov
+file_uploads = Off
+
+; Zmena dopcasneho adresara pre uploadovane subory.
+upload_tmp_dir = /home/tmp
+
+; Maximum allowed size for uploaded files.
+upload_max_filesize = 2M
+
+; Maximum number of files that can be uploaded via a single request
+max_file_uploads = 20
+
+; Kontrola POST velkosti.
+post_max_size = 32M
+
+; Kontrola zdrojov (DoS control)
+max_execution_time = 40
+max_input_time = 40
+memory_limit = 40M
+
+; Zakaz informacii o PHP.
+expose_php = Off
+
+; Zmena znakovej sady.
+default_charset = "iso-8859-1"
+
+; Vypnutie vykonavania vzdialeneho kodu.
+allow_url_fopen = Off
+allow_url_include = Off
+
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
+
+display_startup_errors = Off
+
+log_errors_max_len = 1024
+
+ignore_repeated_errors = Off
+
+ignore_repeated_source = Off
+
+report_memleaks = On
+
+track_errors = Off
+
+html_errors = Off
+
+[SQL]
+sql.safe_mode = On
+
+[Session]
+; Handler used to store/retrieve data.
+; http://php.net/session.save-handler
+session.save_handler = files
+
+; Ochrana sessions.
+session.save_path = "/var/lib/php/sessions"
+session.use_strict_mode = 0
+session.use_cookies = 1
+;session.cookie_secure =
+session.use_only_cookies = 1
+session.auto_start = 0
+
+; Nastavenie cookies.
+session.cookie_lifetime = 1800
+session.name = SESSION
+
+session.cookie_httponly = 1
+```
