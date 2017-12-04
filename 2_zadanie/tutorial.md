@@ -233,6 +233,10 @@ Zakázanie "Entity Tags" (prístup vzdialených používateľov k citlivým info
 
 > Pridanie `FileETag None` do `Directory /var/www/`.
 
+Konfigurácia `Listen` direktívy (buď zmena portu, alebo počúvanie na konkrétnej IP adrese a porte)
+
+*Príklad:*
+> `Listen 10.10.10.1:80`
 
 ### PHP 
 
