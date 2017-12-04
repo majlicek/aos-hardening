@@ -295,5 +295,7 @@ session.cookie_httponly = 1
 ```
 
 Zdroje: 
+
 (1) https://www.techrepublic.com/article/how-to-secure-your-apache-2-server-in-four-steps/
+
 (2) https://geekflare.com/10-best-practices-to-secure-and-harden-your-apache-web-server/
