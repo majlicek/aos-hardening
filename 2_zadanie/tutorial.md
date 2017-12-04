@@ -2,7 +2,7 @@
 
 ## Nastavenie VirtualBox-u
 -	importovať image Debianu
--	vytvoriť klony (web-server)
+-	vytvoriť klon (web-server)
 -	network pre **web-server** nastaviť ako *Bridged Adapter* 
 
 ## 1. Inštalácia a spustenie Apache2
@@ -231,7 +231,24 @@ Zakázanie "Entity Tags" (prístup vzdialených používateľov k citlivým info
 
 `$nano /etc/apache2/apache2.conf`
 
-> Pridanie `FileETag None` do `Directory /var/www/`.
+> Pridanie `FileETag None` do `Directory /var/www/html/`.
+
+Zakázanie starej verzie protokolu HTTP (1.0)
+
+`$nano /etc/apache2/apache2.conf`
+
+```text
+RewriteEngine On
+RewriteCond %{THE_REQUEST} !HTTP/1\.1$
+RewriteRule .* - [F]
+```
+
+> Pridanie do `Directory /var/www/html/`.
+
+Ochrana servera pred XSS útorok
+
+`$nano /etc/apache2/apache2.conf`
+> Pridanie ` Header set X-XSS-Protection "1; mode=block"` do `Directory /var/www/html/`.
 
 Konfigurácia `Listen` direktívy (buď zmena portu, alebo počúvanie na konkrétnej IP adrese a porte)
 
