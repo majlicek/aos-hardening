@@ -217,6 +217,17 @@ Vypnutie výpisu koreňového adresára
 </Directory>
 ```
 
+Vypnutie zobrazovania informácií servera 
+
+`$nano /etc/apache2/config-enabled/security.conf`
+
+> `ServerSignature Off`
+
+> `ServerTokens Prod`
+
+`$service apache2 restart`
+
+
 ### PHP 
 
 `/etc/php/7.0/apache2/php.ini` - neobsahuje celý súbor, iba dôležité prvky
@@ -318,3 +329,5 @@ Zdroje:
 (2) https://geekflare.com/10-best-practices-to-secure-and-harden-your-apache-web-server/
 
 (3) https://www.2daygeek.com/apache-web-server-security-hardening-tips/#
+
+(4) https://www.tecmint.com/apache-security-tips/
