@@ -205,7 +205,7 @@ Vypnutie nepotrebných modulov
 
 `$apachectl -M`
 
-Vypnutie výpisu koreňového adresára
+Vypnutie výpisu koreňového adresára (listovanie medzi adresármi)
 
 `$nano /etc/apache2/apache2.conf`
 
@@ -227,11 +227,16 @@ Vypnutie zobrazovania informácií servera
 
 `$service apache2 restart`
 
+Zakázanie "Entity Tags" (prístup vzdialených používateľov k citlivým informáciám)
+
+`$nano /etc/apache2/apache2.conf`
+
+> Pridanie `FileETag None` do `Directory /var/www/`.
+
 
 ### PHP 
 
 `/etc/php/7.0/apache2/php.ini` - neobsahuje celý súbor, iba dôležité prvky
-
 
 ```text
 [PHP]
@@ -331,3 +336,5 @@ Zdroje:
 (3) https://www.2daygeek.com/apache-web-server-security-hardening-tips/#
 
 (4) https://www.tecmint.com/apache-security-tips/
+
+(5) https://geekflare.com/apache-web-server-hardening-security/
