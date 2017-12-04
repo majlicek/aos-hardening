@@ -1,4 +1,4 @@
-#  Zadanie č. 2 (Hardering Web servera) 
+#  Zadanie č. 2 (Hardening Web servera) 
 
 ## Nastavenie VirtualBox-u
 -	importovať image Debianu
