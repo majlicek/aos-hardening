@@ -113,13 +113,6 @@ $php -v
 
 ### Apache2
 
-`/etc/apache2/apache2.conf`
-
-
-```bash
-
-```
-
 `/etc/apache2/sites-available/prvyweb-domena.sk.conf`
 
 ```text
@@ -199,6 +192,30 @@ Vyhnutie sa Cross Site Tracing
 
 > `TraceEnable off`
 
+Inštalácia modulov mod_security a mod_evasive k zlepšeniu ochrany a zabráneniu útokov
+
+```bash
+$ sudo apt-get install libapache2-modsecurity libapache2-mod-evasive
+$ sudo a2enmod mod-security mod-evasive
+$ sudo service apache2 restart
+$ sudo systemctl restart apache2.service
+```
+
+Vypnutie nepotrebných modulov
+
+`$apachectl -M`
+
+Vypnutie výpisu koreňového adresára
+
+`$nano /etc/apache2/apache2.conf`
+
+```text
+<Directory "/">
+  Options -Indexes
+  Order allow,deny
+  Allow from all
+</Directory>
+```
 
 ### PHP 
 
@@ -299,3 +316,5 @@ Zdroje:
 (1) https://www.techrepublic.com/article/how-to-secure-your-apache-2-server-in-four-steps/
 
 (2) https://geekflare.com/10-best-practices-to-secure-and-harden-your-apache-web-server/
+
+(3) https://www.2daygeek.com/apache-web-server-security-hardening-tips/#
