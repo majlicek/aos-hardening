@@ -1,4 +1,4 @@
-# Zadanie č. 1 (Hardering NAT routra, DHCP a SSH servera)
+# Zadanie č. 1 (Hardening NAT routra, DHCP a SSH servera)
 
 ## Nastavenie VirtualBox-u
 -	importovať image Debianu
