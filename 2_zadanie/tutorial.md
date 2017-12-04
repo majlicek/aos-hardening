@@ -156,7 +156,7 @@ $php -v
 </IfModule>
 ```
 
-Limit HTTP požiadaviek pre `/var/www/[klienti]`
+**Limit HTTP požiadaviek pre** `/var/www/[klienti]`
 
 ```text
 <Directory /var/www/[klienti]/>
@@ -166,7 +166,7 @@ Limit HTTP požiadaviek pre `/var/www/[klienti]`
 </Directory>
 ```
 
-Obmedzenie prehľadávania konkrétnych adresárov 
+**Obmedzenie prehľadávania konkrétnych adresárov**
 
 `/etc/apache2/apache2.conf`
 
@@ -186,13 +186,13 @@ Order Allow,Deny
 Allow from all
 ```
 
-Vyhnutie sa Cross Site Tracing 
+**Vyhnutie sa Cross Site Tracing**
 
 `/etc/apache2/conf-enabled/security.conf`
 
 > `TraceEnable off`
 
-Inštalácia modulov mod_security a mod_evasive k zlepšeniu ochrany a zabráneniu útokov
+**Inštalácia modulov mod_security a mod_evasive k zlepšeniu ochrany a zabráneniu útokov**
 
 ```bash
 $ sudo apt-get install libapache2-modsecurity libapache2-mod-evasive
@@ -201,11 +201,11 @@ $ sudo service apache2 restart
 $ sudo systemctl restart apache2.service
 ```
 
-Vypnutie nepotrebných modulov
+**Vypnutie nepotrebných modulov**
 
 `$apachectl -M`
 
-Vypnutie výpisu koreňového adresára (listovanie medzi adresármi)
+**Vypnutie výpisu koreňového adresára (listovanie medzi adresármi)**
 
 `$nano /etc/apache2/apache2.conf`
 
@@ -217,7 +217,7 @@ Vypnutie výpisu koreňového adresára (listovanie medzi adresármi)
 </Directory>
 ```
 
-Vypnutie zobrazovania informácií servera 
+**Vypnutie zobrazovania informácií servera** 
 
 `$nano /etc/apache2/config-enabled/security.conf`
 
@@ -227,13 +227,13 @@ Vypnutie zobrazovania informácií servera
 
 `$service apache2 restart`
 
-Zakázanie "Entity Tags" (prístup vzdialených používateľov k citlivým informáciám)
+**Zakázanie "Entity Tags" (prístup vzdialených používateľov k citlivým informáciám)**
 
 `$nano /etc/apache2/apache2.conf`
 
 > Pridanie `FileETag None` do `Directory /var/www/html/`.
 
-Zakázanie starej verzie protokolu HTTP (1.0)
+**Zakázanie starej verzie protokolu HTTP (1.0)**
 
 `$nano /etc/apache2/apache2.conf`
 
@@ -245,19 +245,21 @@ RewriteRule .* - [F]
 
 > Pridanie do `Directory /var/www/html/`.
 
-Ochrana servera pred XSS útorok
+**Ochrana servera pred XSS útokom**
 
 `$nano /etc/apache2/apache2.conf`
 > Pridanie ` Header set X-XSS-Protection "1; mode=block"` do `Directory /var/www/html/`.
 
-Konfigurácia `Listen` direktívy (buď zmena portu, alebo počúvanie na konkrétnej IP adrese a porte)
+**Konfigurácia** `Listen` **direktívy (buď zmena portu, alebo počúvanie na konkrétnej IP adrese a porte)**
 
 *Príklad:*
 > `Listen 10.10.10.1:80`
 
 ### PHP 
 
-`/etc/php/7.0/apache2/php.ini` - neobsahuje celý súbor, iba dôležité prvky
+`/etc/php/7.0/apache2/php.ini` - 
+
+*Pozn.: neobsahuje celý súbor, iba dôležité prvky*
 
 ```text
 [PHP]
@@ -348,7 +350,7 @@ session.name = SESSION
 session.cookie_httponly = 1
 ```
 
-Zdroje: 
+*Zdroje:* 
 
 (1) https://www.techrepublic.com/article/how-to-secure-your-apache-2-server-in-four-steps/
 
@@ -359,3 +361,5 @@ Zdroje:
 (4) https://www.tecmint.com/apache-security-tips/
 
 (5) https://geekflare.com/apache-web-server-hardening-security/
+
+(6) https://www.maketecheasier.com/securing-apache-ubuntu-2/
