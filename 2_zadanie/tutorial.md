@@ -193,6 +193,13 @@ Order Allow,Deny
 Allow from all
 ```
 
+Vyhnutie sa Cross Site Tracing 
+
+`/etc/apache2/conf-enabled/security.conf`
+
+> `TraceEnable off`
+
+
 ### PHP 
 
 `/etc/php/7.0/apache2/php.ini` - neobsahuje celý súbor, iba dôležité prvky
@@ -289,3 +296,4 @@ session.cookie_httponly = 1
 
 Zdroje: 
 (1) https://www.techrepublic.com/article/how-to-secure-your-apache-2-server-in-four-steps/
+(2) https://geekflare.com/10-best-practices-to-secure-and-harden-your-apache-web-server/
